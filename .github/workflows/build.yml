@@ -1,0 +1,33 @@
+﻿name: build
+on: 
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  DOTNET_NOLOGO: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+        with: 
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: 🙏 build
+        run: dotnet build
+
+      - name: 🧪 test
+        run: dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type none --logger "console;verbosity=detailed" -r "./out"
+
+      - name: 📦 artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: tests-${{ github.run_number }}
+          path: ./out
