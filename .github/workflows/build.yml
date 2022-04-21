@@ -23,7 +23,7 @@ jobs:
         run: dotnet build
 
       - name: 🧪 test
-        run: dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type none --logger "console;verbosity=detailed" -r "./out"
+        run: dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type full --logger "console;verbosity=detailed" -r "./out"
 
       - name: 📦 artifact
         uses: actions/upload-artifact@v2
