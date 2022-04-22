@@ -19,11 +19,14 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: setup
-        run: |
-          dotnet tool install -g dotnet-vs
-          vs install com pre +vsx
-          echo "$(vs where pre com --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
+      - name: ⚙ setup
+        run: dotnet tool install -g dotnet-vs
+
+      - name: ⚙ install
+        run: vs install com pre +vsx
+
+      - name: ≥ devenv
+        run: echo "$(vs where pre com --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
 
       - name: 🙏 build
         run: msbuild -r
