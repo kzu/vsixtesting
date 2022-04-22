@@ -19,11 +19,20 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: setup
+        run: |
+          dotnet tool install -g dotnet-vs
+          vs install com pre +vsx
+          echo "$(vs where pre com --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
+
       - name: 🙏 build
-        run: dotnet build
+        run: msbuild -r
 
       - name: 🧪 test
-        run: dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type full --logger "console;verbosity=detailed" -r "./out"
+        run: | 
+          vs rel com /ResetSettings /Command "File.Exit"
+          get-process -name 'devenv' | $_.WaitForExit()
+          dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type full --logger "console;verbosity=detailed" -r "./out"
 
       - name: 📦 artifact
         uses: actions/upload-artifact@v2

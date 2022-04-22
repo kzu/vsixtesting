@@ -10,7 +10,7 @@ namespace VsixTests;
 
 public class SampleTests
 {
-    [VsixFact]
+    [VsixFact(TimeoutSeconds = 60)]
     public async Task SanityCheckAsync()
     {
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
