@@ -26,7 +26,7 @@ jobs:
         run: vs where
 
       - name: ≥ devenv
-        run: echo "$(vs where pre com --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
+        run: echo "$(vs where --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
 
       - name: 🙏 build
         run: msbuild -r
