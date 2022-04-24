@@ -23,7 +23,7 @@ jobs:
         run: dotnet tool install -g dotnet-vs
 
       - name: ⚙ install
-        run: vs install com pre +vsx
+        run: vs where
 
       - name: ≥ devenv
         run: echo "$(vs where pre com --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
@@ -33,7 +33,7 @@ jobs:
 
       - name: 🧪 test
         run: | 
-          vs rel com /ResetSettings /Command "File.Exit"
+          vs /ResetSettings /Command "File.Exit"
           get-process -name 'devenv' | $_.WaitForExit()
           dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type full --logger "console;verbosity=detailed" -r "./out"
 
