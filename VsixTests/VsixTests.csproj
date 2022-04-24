@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net472</TargetFramework>
-		<IsPackable>false</IsPackable>
-		<LangVersion>Preview</LangVersion>
-		<RestoreSources>https://api.nuget.org/v3/index.json;https://pkg.kzu.io/index.json;$(RestoreSources)</RestoreSources>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <LangVersion>Preview</LangVersion>
+    <RestoreSources>https://api.nuget.org/v3/index.json;https://pkg.kzu.io/index.json;$(RestoreSources)</RestoreSources>
+    <GenerateAssemblyVsixAttribute>false</GenerateAssemblyVsixAttribute>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="envdte" Version="17.1.32210.191" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.*" />
-		<PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.1.*" />
-		<PackageReference Include="xunit" Version="2.4.1" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
-		<PackageReference Include="xunit.vsix" Version="42.42.42-main.*" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="envdte" Version="17.1.32210.191" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.*" />
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.1.*" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="xunit.vsix" Version="42.42.42-main.*" />
+  </ItemGroup>
 
 </Project>
