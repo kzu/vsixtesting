@@ -6,6 +6,8 @@
     <LangVersion>Preview</LangVersion>
     <RestoreSources>https://api.nuget.org/v3/index.json;https://pkg.kzu.io/index.json;$(RestoreSources)</RestoreSources>
     <GenerateAssemblyVsixAttribute>false</GenerateAssemblyVsixAttribute>
+    <!-- In CI, test on regular hive -->
+    <RootSuffix Condition="$(CI)">.</RootSuffix>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +17,11 @@
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
     <PackageReference Include="xunit.vsix" Version="42.42.42-main.*" />
+    <PackageReference Include="vswhere" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vsix\Vsix.csproj" />
   </ItemGroup>
 
 </Project>

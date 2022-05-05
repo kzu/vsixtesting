@@ -23,6 +23,7 @@ __*__
 *.lock.json
 *.nuget.props
 *.nuget.targets
+*.vsix
 
 node_modules
 _site

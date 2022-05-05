@@ -9,7 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.github\workflows\build.yml = .github\workflows\build.yml
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vsix", "Vsix\Vsix.csproj", "{335F7734-B9BD-4443-9C06-DE66D2BC704F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,10 @@ Global
 		{7BD3575E-DDFB-4808-8C50-21C87358139F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BD3575E-DDFB-4808-8C50-21C87358139F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BD3575E-DDFB-4808-8C50-21C87358139F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335F7734-B9BD-4443-9C06-DE66D2BC704F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335F7734-B9BD-4443-9C06-DE66D2BC704F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335F7734-B9BD-4443-9C06-DE66D2BC704F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335F7734-B9BD-4443-9C06-DE66D2BC704F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
