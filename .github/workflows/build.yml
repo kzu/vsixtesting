@@ -8,6 +8,7 @@ on:
 
 env:
   DOTNET_NOLOGO: true
+  Configuration: Release
 
 jobs:
   build:
@@ -19,24 +20,32 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: ⚙ msbuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: 🙏 build
+        run: msbuild -r
+
       - name: ⚙ setup
         run: dotnet tool install -g dotnet-vs
 
-      - name: ⚙ install
-        run: vs where
+      - name: ≥ vssetup
+        run: vs where --prop=enginePath >> $env:GITHUB_PATH
 
-      - name: ≥ devenv
-        run: echo "$(vs where --prop=InstallationPath)\MSBuild\Current\Bin" >> $env:GITHUB_PATH
-
-      - name: 🙏 build
-        run: msbuild -r /p:Configuration=Release
+      - name: ⚙ vsix
+        run: | 
+          vs /NoSplash /ResetSettings CSharp /Command "File.Exit"
+          wait-process -name 'devenv'
+          vsixinstaller.exe /nr /sp /q Kzu.vsix
+          wait-process -name vsixinstaller
+          vs
 
       - name: 🧪 test
         run: | 
-          vs /ResetSettings General /Command "File.Exit"
-          wait-process -name 'devenv'
-          vs
-          dotnet test -c Release --no-build --blame-hang-timeout 10m --blame-hang-dump-type full --logger "console;verbosity=detailed" -r "./out"
+          dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type full -r ./out
+
+      - name: ⚙ vs
+        run: vs kill all
 
       - name: 📦 artifact
         uses: actions/upload-artifact@v2

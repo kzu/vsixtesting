@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>Kzu.Vsix</AssemblyName>
+    <CreateVsixContainer>true</CreateVsixContainer>
+    <DeployExtension Condition="$(CI)">false</DeployExtension>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(DevEnvDir)devenv.exe</StartProgram>
+    <StartArguments>/rootSuffix Exp</StartArguments>
+    <IncludeDebugSymbolsInVSIXContainer>true</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>true</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <CustomAfterMicrosoftCSharpTargets Condition="'$(VsSDKInstall)' != ''" >$(VsSDKInstall)\Microsoft.VsSDK.targets</CustomAfterMicrosoftCSharpTargets>
+    <TargetVsixContainer>..\Kzu.vsix</TargetVsixContainer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.1.4054" />
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.1.32210.191" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="source.extension.vsixmanifest" />
+  </ItemGroup>
+
+  <Target Name="GenerateSource" BeforeTargets="GetVsixSourceItems">
+    <WriteLinesToFile File="$(BaseIntermediateOutputPath)source.json" Overwrite="true" WriteOnlyWhenDifferent="true"
+                      Lines='{
+  "commit": "$(SourceRevisionId.Substring(0, 9))",
+  "repository": "$(GITHUB_REPOSITORY)"
+}' />
+    <ItemGroup>
+      <Content Include="$(BaseIntermediateOutputPath)source.json" Link="source.json" IncludeInVSIX="true" />
+    </ItemGroup>
+  </Target>
+
+</Project>
