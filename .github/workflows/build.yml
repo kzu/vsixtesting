@@ -26,11 +26,10 @@ jobs:
       - name: 🙏 build
         run: msbuild -r
 
-      - name: ⚙ setup
-        run: dotnet tool install -g dotnet-vs
-
-      - name: ≥ vssetup
-        run: vs where --prop=enginePath >> $env:GITHUB_PATH
+      - name: 🛠 vs
+        run: |
+          dotnet tool install -g dotnet-vs
+          vs where --prop=EnginePath >> $env:GITHUB_PATH
 
       - name: ⚙ vsix
         run: | 
@@ -44,7 +43,7 @@ jobs:
         run: | 
           dotnet test --no-build --blame-hang-timeout 5m --blame-hang-dump-type full -r ./out
 
-      - name: ⚙ vs
+      - name: ❎ vs
         run: vs kill all
 
       - name: 📦 artifact
